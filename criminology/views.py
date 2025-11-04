@@ -2249,7 +2249,7 @@ def save_data_tos(request):
                 academic_year=active_year,
                 defaults={
                     'score': row['Total Score'],
-                    'rank': row['Rank'],
+                    'rank_position': row['Rank'],
                     'lastname': row['Last Name'],
                     'firstname': row['First Name'],
                     'period': row['Class'],
@@ -2395,7 +2395,7 @@ def save_top_5_students(assessment_exam_id, top_5_students):
             first_name=student['First Name'],
             lastname=student['Last Name'],
             score=student['Total Score'],
-            rank=student['Rank']
+            rank_position=student['Rank']
         )
 
 
@@ -2675,7 +2675,7 @@ def save_data_assessment(request):
                     student_score = {
                         'academic_year': active_year,
                         'score': row['Total Score'],
-                        'rank': row['Rank'],
+                        'rank_position': row['Rank'],
                         'lastname': row['Last Name'],
                         'firstname': row['First Name'],
                         'studentid': row['studentid'],
@@ -3189,7 +3189,7 @@ def students_all_stats_tos(request, studentid):
 @login_required(login_url='loginpage')
 def display_scores_assessment(request, exam_id):
     scoress = StudentsScoreAssessment.objects.filter(exam_id = exam_id).first()
-    scores = StudentsScoreAssessment.objects.filter(exam_id = exam_id).order_by('rank')
+    scores = StudentsScoreAssessment.objects.filter(exam_id = exam_id).order_by('rank_position')
     context = {
         "scores": scores,
         "scoress" : scoress,
@@ -3198,7 +3198,7 @@ def display_scores_assessment(request, exam_id):
 
 @login_required(login_url='loginpage')
 def display_scores_tos(request, exam_id, subject_name):
-    scores = StudentsScoreTos.objects.filter(exam_id=exam_id).order_by('rank')
+    scores = StudentsScoreTos.objects.filter(exam_id=exam_id).order_by('rank_position')
     
     context = {
         "scores": scores,
@@ -3339,4 +3339,5 @@ def clear_answer_keys_assessment(request):
         global answer_keys
         answer_keys = []
         return JsonResponse({'status': 'success'})
+
     return JsonResponse({'status': 'failed'}, status=400)
