@@ -210,7 +210,7 @@ class StudentsScoreAssessment(models.Model):
     subject = models.ForeignKey(AnswerKeyAssessment, on_delete=models.CASCADE, null=True, blank=True)
     score = models.IntegerField(null=True, blank=True)
     exam_id = models.IntegerField(null=True, blank=True)
-    rank = models.IntegerField(null=True, blank=True)
+    rank_position = models.IntegerField(null=True, blank=True)
     lastname = models.CharField(max_length=200, null=True, blank=True)
     firstname = models.CharField(max_length=200, null=True, blank=True)
     studentid = models.IntegerField(null=True, blank=True)
@@ -450,7 +450,7 @@ class StudentsTop5(models.Model):
     first_name = models.CharField(max_length=200, null=True, blank=True)
     lastname = models.CharField(max_length=200, null=True, blank=True)
     score = models.IntegerField(null=True, blank=True)
-    rank = models.IntegerField(null=True, blank=True)
+    rank_position = models.IntegerField(null=True, blank=True)
 
 
 class Reports(models.Model):
@@ -527,3 +527,4 @@ class AssessmentRecordsDashboard(models.Model):
                          self.analyzing_correct_total + self.evaluating_correct_total)
 
         return (correct_total / total) * 100 if total else 0
+
