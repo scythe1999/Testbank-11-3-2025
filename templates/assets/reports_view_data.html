@@ -122,7 +122,7 @@
             <tbody>
                 {% for item in students_top5 %}
                 <tr>
-                    <td class="border px-4 py-2 text-center">{{ item.rank }}</td>
+                    <td class="border px-4 py-2 text-center">{{ item.rank_position }}</td>
                     <td class="border px-4 py-2">{{ item.first_name|capfirst }} {{ item.lastname|capfirst }}</td>
                     <td class="border px-4 py-2 text-center">{{ item.score }}</td>
                 </tr>
@@ -132,3 +132,4 @@
     </div>
 </div>
 {% endblock %}
+
